@@ -1,0 +1,17 @@
+#819535 Peralta Gonzalez, Isabel, M, 3, B
+#818903 Martínez Vicens, Ismael, M, 3, B
+
+La estructura del archivo "practica_3.sh" se basa por orden de importancia en donde tenemos dos ifs principales los cuales uno comprueba si el usuario tiene privilegios de administrador y si el numero de parametros a la hora de ejecutarlo es el adecuado es decir 2. Para ello si estas dos cosas se cumplen se procede a ejecutar el codigo:
+
+Primero se realiza el comando para que el usuario as no tenga que poner la contraseña cuando usa sudo es decir lo correspondiente al apartado b
+
+Salvamos el valor de ifs
+
+Y se comprueba si el primer parametro introducido es [-a|-s]. 
+Si es -a se procede a lectura del archivo pasado como segundo parametro para ello, se crea un bucle while donde se lee todo el texto y se guardan en las variables username, password y nombreCompleto. Con estos valores se llaman a la funcion CrearUsuario, la cual comprueba si todos los campos estan completos. Tambien hay un if el cual comprueba si el usuario ya existe. Si no existe se procede a crear el usuario usando el comando useradd.
+Mediante la utilizacion de -m y -k copiamos el directorio home en /etc/skel. Acontinuacion de este comando le decimos que el usuario no puede tener un uid inferior a 1815. Mostramos por pantalla los datos que se nos piden y se le dice mediante el comando usermod -f 30 que la contraseña tiene la caducidad de 30 dias.
+
+Si el primer parametro es -s se procede a crear el directorio /extra/backup y se lee el archivo pasado como segundo parametro mediante el bucle while. Se comprueba si el campo del usuario esta vacio. Si este no esta vacio se procede a buscar en el archivo /etc/passwd una linea que contenga el nombre de usuario dado. El comando  cut -d ":" -f6 divide la linea del comando grep en campos usando el delimitador ":" y lee el sexto campo. Realiza un backup del directorio home del usuario, donde lo mueve a la carpeta creada anteriormente y procede a borrar el usuario mediante el comando userdel.
+
+Si el primer parametro no corresponde con ningun ninguno de los dos anteriores se mostrara la opcion de opcion invalidada.
+Y por ultimo el valor IFS obtiene de nuevo el valor almacenado al principio, puesto que hemos realizados cambios diciendole que IFS=, es decir que el separador de estos archivos era la ",".
